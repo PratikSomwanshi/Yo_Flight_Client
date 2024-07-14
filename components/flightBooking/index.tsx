@@ -14,7 +14,7 @@ function FlightBooking({ id }: { id: string }) {
                 `${process.env.NEXT_PUBLIC_AIRPLANE_SERVICE_URL}/flight/single/${id}`
             );
             if (!res.ok) {
-                throw new Error("Network response was not ok");
+                throw new Error("Soemthing went wrong");
             }
             return res.json();
         },

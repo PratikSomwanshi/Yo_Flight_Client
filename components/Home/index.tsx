@@ -10,12 +10,23 @@ import useTravelStore from "@/store";
 import Link from "next/link";
 
 function Home() {
-    const { arrivalCity, departureCity } = useTravelStore();
+    const { arrivalCity, departureCity, date } = useTravelStore();
     const [error, setError] = useState(false);
+    const [dateError, setDateError] = useState("");
 
     const query = useMutation({
         mutationKey: ["flights"],
         mutationFn: async () => {
+            if (!date) {
+                setDateError("Please select a date");
+                console.log("date is null");
+                return;
+            }
+
+            setDateError("");
+
+            console.log("a" + arrivalCity, departureCity);
+
             const res = await fetch(
                 `${process.env.NEXT_PUBLIC_AIRPLANE_SERVICE_URL}/flight/city?arrivalAirport=${arrivalCity}&departureAirport=${departureCity}`,
                 {
@@ -51,7 +62,7 @@ function Home() {
             </div>
             <div className="py-6">
                 {query.isPending &&
-                    Array(1)
+                    Array(5)
                         .fill("")
                         .map((_, i) => (
                             <div
@@ -77,6 +88,11 @@ function Home() {
                         No flight found
                     </div>
                 )}
+                {dateError && (
+                    <div>
+                        <p className="text-center text-red-500">{dateError}</p>
+                    </div>
+                )}
                 {!query.isPending &&
                     !error &&
                     query.data?.data &&
@@ -93,6 +109,7 @@ function Home() {
                                                 {flight.arrivalAirport.name}
                                             </h2>
                                             <MoveRight />
+
                                             <h2 className="font-semibold">
                                                 {flight.departureAirport.name}
                                             </h2>
