@@ -84,9 +84,11 @@ export const register = async (data: registerData) => {
     const res = await response.json();
 
     console.log(res);
+
+    console.log(res);
     if (response.ok) {
-        session.username = res.username;
-        session.token = res.token;
+        session.username = res.data.userName;
+        session.token = res.data.tocken;
         session.isLoggedIn = true;
         await session.save();
         redirect("/");
