@@ -7,9 +7,11 @@ async function Seat({ params: { id } }: { params: { id: string } }) {
 
     if (!session.isLoggedIn) {
         return (
-            <p className="text-center text-green-700">
-                You need to be logged in to book a seat
-            </p>
+            <div className="w-full h-[90vh] flex justify-center items-center">
+                <p className="text-center text-xl text-green-700">
+                    You need to be logged in to book a flight
+                </p>
+            </div>
         );
     }
 

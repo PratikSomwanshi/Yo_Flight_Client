@@ -16,7 +16,7 @@ async function Navbar() {
     return (
         <div className="h-12 flex justify-around items-center bg-gray-100">
             <Link href="/" className="h-full flex items-center">
-                <Logo width={130} height={130} />
+                <h2>Yo_Flight</h2>
             </Link>
             <div className="flex  w-[20%] justify-between">
                 {session.isLoggedIn ? (
