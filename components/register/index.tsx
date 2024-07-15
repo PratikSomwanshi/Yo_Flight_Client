@@ -5,8 +5,10 @@ import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import Select from "react-select";
 import { set } from "date-fns";
+import { LoaderCircle } from "lucide-react";
 
 function Register() {
+    const [loading, setLoading] = useState(false);
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [fullName, setFullName] = useState("");
@@ -63,6 +65,7 @@ function Register() {
 
         let res;
         try {
+            setLoading(true);
             res = await register({
                 username,
                 email,
@@ -76,7 +79,9 @@ function Register() {
                     country,
                 },
             });
+            setLoading(false);
         } catch (error: any) {
+            setLoading(false);
             if (error.message === "fetch failed") {
                 setErrorMessage("Something went wrong. Please try again.");
             } else {
@@ -233,7 +238,13 @@ function Register() {
                         <button
                             type="submit"
                             className="w-full md:w-[70%] bg-green-500 p-2 rounded text-white hover:bg-green-600">
-                            Register
+                            {loading ? (
+                                <div className="flex justify-center items-center">
+                                    <LoaderCircle className="animate-spin" />
+                                </div>
+                            ) : (
+                                "Register"
+                            )}
                         </button>
                     </div>
                     {errorMessage && (
