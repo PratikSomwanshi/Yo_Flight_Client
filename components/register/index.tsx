@@ -45,8 +45,9 @@ function Register() {
             return;
         }
 
+        let res;
         try {
-            const res = await register({
+            res = await register({
                 username,
                 email,
                 fullName,
@@ -60,11 +61,6 @@ function Register() {
                 },
             });
 
-            if (res?.error) {
-                setErrorMessage(res.error);
-                return;
-            }
-
             // Handle successful registration (e.g., redirect to login page)
         } catch (error: any) {
             if (error.message === "fetch failed") {
@@ -72,6 +68,11 @@ function Register() {
             } else {
                 setErrorMessage(error.message);
             }
+        }
+
+        if (res?.error) {
+            setErrorMessage(res.error);
+            return;
         }
     };
 

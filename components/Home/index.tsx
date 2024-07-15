@@ -54,7 +54,7 @@ function Home() {
             <div className="mt-16 mb-10">
                 <Divider>
                     <Button
-                        className="bg-slate-400 hover:bg-slate-300 rounded-md absolute -top-5 left-[46%] w-32"
+                        className="bg-slate-400 hover:bg-slate-300 rounded-md absolute -top-5 left-1/2 transform -translate-x-1/2 w-32"
                         onClick={() => query.mutate()}>
                         Search
                     </Button>
@@ -66,18 +66,18 @@ function Home() {
                         .fill("")
                         .map((_, i) => (
                             <div
-                                className="bg-slate-100 m-auto w-[60%] h-20 px-4 py-2 rounded-lg"
+                                className="bg-slate-100 mx-auto w-full sm:w-[80%] md:w-[60%] lg:w-[50%] h-20 px-4 py-2 rounded-lg mb-4"
                                 key={i}>
-                                <div className="flex items-center justify-between h-full">
-                                    <div className="flex flex-col justify-around h-full ">
-                                        <Skeleton className="h-5 w-[250px] bg-slate-200 rounded-xl" />
-                                        <div className="flex space-x-4">
-                                            <Skeleton className="h-5 w-[250px] bg-slate-200 rounded-xl" />
+                                <div className="flex flex-col sm:flex-row items-center justify-between h-full">
+                                    <div className="flex flex-col justify-around h-full w-full sm:w-auto">
+                                        <Skeleton className="h-5 w-full sm:w-[250px] bg-slate-200 rounded-xl mb-2 sm:mb-0" />
+                                        <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
+                                            <Skeleton className="h-5 w-full sm:w-[250px] bg-slate-200 rounded-xl" />
                                         </div>
                                     </div>
-                                    <div>
+                                    <div className="mt-4 sm:mt-0 w-full sm:w-auto">
                                         <h2 className="flex items-center">
-                                            <Skeleton className="h-5 w-[250px] bg-slate-200 rounded-xl" />
+                                            <Skeleton className="h-5 w-full sm:w-[250px] bg-slate-200 rounded-xl" />
                                         </h2>
                                     </div>
                                 </div>
@@ -97,26 +97,27 @@ function Home() {
                     !error &&
                     query.data?.data &&
                     query.data.data.map((flight: any) => (
-                        <Link href={`/search/${flight.flightNumber}`}>
-                            <div
-                                className="bg-slate-100 m-auto w-[60%] h-20 px-4 py-2 rounded-lg"
-                                key={flight.flightNumber}>
-                                <div className="flex items-center justify-between h-full">
-                                    <div className="flex flex-col justify-around h-full ">
-                                        <h2>{flight.flightNumber}</h2>
-                                        <div className="flex space-x-4">
-                                            <h2 className="font-semibold">
+                        <Link
+                            href={`/search/${flight.flightNumber}`}
+                            key={flight.flightNumber}>
+                            <div className="bg-slate-100 mx-auto w-[96%] m-auto  sm:w-[80%] md:w-[60%] lg:w-[50%] h-auto p-4 rounded-lg mb-4">
+                                <div className="flex flex-col sm:flex-row items-center justify-between h-full">
+                                    <div className="flex flex-col justify-around h-full w-full sm:w-auto">
+                                        <h2 className="text-lg sm:text-base">
+                                            {flight.flightNumber}
+                                        </h2>
+                                        <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
+                                            <h2 className="font-semibold text-sm sm:text-base">
                                                 {flight.arrivalAirport.name}
                                             </h2>
                                             <MoveRight />
-
-                                            <h2 className="font-semibold">
+                                            <h2 className="font-semibold text-sm sm:text-base">
                                                 {flight.departureAirport.name}
                                             </h2>
                                         </div>
                                     </div>
-                                    <div>
-                                        <h2 className="flex items-center">
+                                    <div className="mt-4 sm:mt-0 w-full sm:w-auto">
+                                        <h2 className="flex items-center text-sm sm:text-base">
                                             <IndianRupee size={14} />
                                             {flight.amount}
                                         </h2>

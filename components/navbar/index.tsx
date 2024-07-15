@@ -14,22 +14,22 @@ async function Navbar() {
     };
 
     return (
-        <div className="h-12 flex justify-around items-center bg-gray-100">
+        <div className="h-12 flex justify-between items-center bg-gray-100 px-4 md:px-8">
             <Link href="/" className="h-full flex items-center">
                 <h2>Yo_Flight</h2>
             </Link>
-            <div className="flex  w-[20%] justify-between">
+            <div className="flex w-full sm:w-[50%] md:w-[30%] justify-end sm:justify-between">
                 {session.isLoggedIn ? (
                     <NavbarButton username={session.username} logout={logout} />
                 ) : (
-                    <>
+                    <div className="flex space-x-4">
                         <Link href="/login">
-                            <div>Login</div>
+                            <div className="hover:text-blue-500">Login</div>
                         </Link>
                         <Link href="/register">
-                            <div>Register</div>
+                            <div className="hover:text-blue-500">Register</div>
                         </Link>
-                    </>
+                    </div>
                 )}
             </div>
         </div>
